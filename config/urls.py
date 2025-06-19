@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import HttpResponse
 from django.contrib import admin 
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
@@ -25,13 +26,14 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
+    path('', lambda request: HttpResponse("✨ Armani Estate is live!")),
     path('admin/', admin.site.urls),
     path('api/payments/', include('payments.urls')),
-    path('api/', include('listings.urls')),      # Your app's endpoints
+    path('api/', include('listings.urls')),
     path('api/', include('users.urls')),
     path('api/inquiries/', include('inquiries.urls')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # <-- Add this
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), # <-- And this
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 if settings.DEBUG:
