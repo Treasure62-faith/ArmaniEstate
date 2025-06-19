@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: armani-estate
+    env: python
+    plan: free
+    buildCommand: "./render-build.sh"
+    startCommand: "gunicorn config.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings
+      - fromFile: .env
